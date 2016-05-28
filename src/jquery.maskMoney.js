@@ -219,6 +219,10 @@
                     }
                 }
 
+                function getKeyCode(str) {
+                    return str.charCodeAt(str.length - 1);
+                }
+
                 function keypressEvent(e) {
                     e = e || window.event;
                     var key = e.which || e.charCode || e.keyCode,
@@ -230,6 +234,11 @@
                     //added to handle an IE "special" event
                     if (key === undefined) {
                         return false;
+                    }
+                    
+                    //for android chrome keycode fix
+                    if (key == 0 || key == 229) { 
+                        key = getKeyCode($input.val());
                     }
 
                     // any key except the numbers 0-9
